@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GhanaTech Store - Frontend
 
-## Getting Started
+A Next.js 14 e-commerce frontend for the GhanaTech Store.
 
-First, run the development server:
+## Tech Stack
 
+- **Next.js 14** (App Router)
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+- **Axios** - API calls
+- **React Hot Toast** - Notifications
+- **Lucide React** - Icons
+
+## Setup
+
+1. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Create `.env.local`:
+```
+NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Start development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000)
 
-## Learn More
+## Pages
 
-To learn more about Next.js, take a look at the following resources:
+- `/` - Home page
+- `/products` - Products listing
+- `/products/[id]` - Product detail
+- `/cart` - Shopping cart
+- `/checkout` - Checkout flow
+- `/orders` - Order history
+- `/login` - Login
+- `/register` - Registration
+- `/admin` - Admin dashboard
+- `/admin/products` - Manage products
+- `/admin/orders` - Manage orders
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- User authentication (JWT)
+- Product browsing with filters
+- Shopping cart
+- Checkout with multiple payment methods
+- Order tracking
+- Admin dashboard
+- Mobile Money payment (Ghana-specific)
+- Responsive design
+
+## Ghana-Specific Features
+
+- Ghana Cedis (GHS) currency
+- All 16 regions for shipping
+- Ghana Post GPS address support
+- Mobile Money integration (MTN MoMo, Vodafone Cash, AirtelTigo Money)
+- Ghana phone number validation
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new).
