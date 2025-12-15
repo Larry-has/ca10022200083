@@ -1,11 +1,11 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { formatCurrency } from '@/lib/utils';
 import Button from '@/components/ui/Button';
 
-export default function MockPaymentPage() {
+function MockPaymentContent() {
   const searchParams = useSearchParams();
   const reference = searchParams.get('reference');
   const amount = parseFloat(searchParams.get('amount') || '0');
@@ -14,9 +14,7 @@ export default function MockPaymentPage() {
 
   const handlePay = () => {
     setProcessing(true);
-    // Simulate payment processing delay
     setTimeout(() => {
-      // Redirect back to callback with reference
       if (callback) {
         const redirectUrl = `${decodeURIComponent(callback)}&reference=${reference}`;
         window.location.href = redirectUrl;
@@ -25,13 +23,14 @@ export default function MockPaymentPage() {
   };
 
   const handleCancel = () => {
-    window.history.back();
+    if (typeof window !== 'undefined') {
+      window.history.back();
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-8">
-        {/* Mock Paystack Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg mb-4">
             <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
@@ -42,7 +41,6 @@ export default function MockPaymentPage() {
           <p className="text-gray-500 text-sm">Test Mode - No real payment</p>
         </div>
 
-        {/* Payment Details */}
         <div className="bg-gray-50 rounded-lg p-6 mb-6">
           <div className="text-center">
             <p className="text-gray-600 mb-2">You are paying</p>
@@ -51,7 +49,6 @@ export default function MockPaymentPage() {
           </div>
         </div>
 
-        {/* Payment Options */}
         <div className="space-y-3 mb-6">
           <div className="border rounded-lg p-4 bg-yellow-50 border-yellow-300 cursor-pointer">
             <div className="flex items-center gap-3">
@@ -88,12 +85,10 @@ export default function MockPaymentPage() {
           </div>
         </div>
 
-        {/* Reference */}
         <p className="text-center text-gray-400 text-xs mb-6">
           Reference: {reference}
         </p>
 
-        {/* Actions */}
         <div className="space-y-3">
           <Button
             onClick={handlePay}
@@ -111,7 +106,6 @@ export default function MockPaymentPage() {
           </button>
         </div>
 
-        {/* Footer */}
         <div className="mt-8 pt-6 border-t text-center">
           <p className="text-xs text-gray-400">
             This is a mock payment page for testing purposes.
@@ -121,5 +115,17 @@ export default function MockPaymentPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function MockPaymentPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="animate-pulse text-gray-500">Loading payment...</div>
+      </div>
+    }>
+      <MockPaymentContent />
+    </Suspense>
   );
 }
