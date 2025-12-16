@@ -29,6 +29,13 @@ function ProductsContent() {
   const [sort, setSort] = useState('-createdAt');
   const [showFilters, setShowFilters] = useState(false);
 
+  // Update category when URL changes
+  useEffect(() => {
+    const urlCategory = searchParams.get('category') || '';
+    setCategory(urlCategory);
+    setPage(1);
+  }, [searchParams]);
+
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);

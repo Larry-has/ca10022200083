@@ -49,7 +49,7 @@ export default function Footer() {
                 <Link href="/login" className="hover:text-white">My Account</Link>
               </li>
               <li>
-                <Link href="/register" className="hover:text-white">Register</Link>
+                <Link href="/faq" className="hover:text-white">FAQs</Link>
               </li>
             </ul>
           </div>
